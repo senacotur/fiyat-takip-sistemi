@@ -2,141 +2,110 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <title>🧠 AI Fiyat Karar Destek Sistemi</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Fiyat Takip Paneli</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-        body { background-color: #f4f6f9; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        .card { border: none; border-radius: 12px; transition: all 0.3s ease; }
-        .card:hover { transform: translateY(-2px); }
-        .table-container { background: white; border-radius: 12px; padding: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        :root {
+            --bg-dark: #0f172a;
+            --card-bg: #1e293b;
+            --accent-blue: #38bdf8;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            margin: 0;
+            padding: 40px 20px;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            background: linear-gradient(to right, #38bdf8, #818cf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        p.subtitle {
+            color: var(--text-muted);
+            margin-bottom: 40px;
+        }
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            text-align: left;
+            padding: 16px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        th {
+            color: var(--accent-blue);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 0.05em;
+        }
+        td {
+            color: var(--text-main);
+            font-size: 0.95rem;
+        }
+        .status-badge {
+            background: rgba(56, 189, 248, 0.1);
+            color: var(--accent-blue);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: inline-block;
+        }
     </style>
 </head>
 <body>
-
-    <div class="container mt-5">
-        <h1 class="mb-4 text-center text-primary fw-bold">🧠 AI Destekli Fiyat Takip & Karar Destek Sistemi</h1>
+    <div class="container">
+        <h1>AI Destekli Fiyat Takip Sistemi</h1>
+        <p class="subtitle">�r�n fiyat de�i�imleri ve yapay zeka duyarl�l�k analiz paneli.</p>
         
-        <div class="card mb-4 shadow-sm bg-dark text-white">
-            <div class="card-header border-0 bg-transparent fw-bold pt-3 fs-5">🎯 Yeni Ürün Takibi Başlat</div>
-            <div class="card-body">
-                <form action="/add" method="POST" class="row g-3">
-                    <div class="col-md-7">
-                        <label class="form-label fw-bold text-light">Ürün Linki (URL):</label>
-                        <input type="text" name="url" class="form-control bg-secondary text-white border-0" placeholder="https://webscraper.io/test-sites/e-commerce/allinone veya ürün linki" required>
-                    </div>
-                    <div class="col-md-3">
-                        <label class="form-label fw-bold text-light">Hedef Fiyat ($ / TL):</label>
-                        <input type="number" step="0.01" name="target_price" class="form-control bg-secondary text-white border-0" placeholder="1200" required>
-                    </div>
-                    <div class="col-md-2 d-flex align-items-end">
-                        <button type="submit" class="btn btn-success w-100 fw-bold py-2 shadow">Takibe Ekle</button>
-                    </div>
-                </form>
-            </div>
+        <div class="card">
+            <table>
+                <thead>
+                    <tr>
+                        <th>�r�n Ad�</th>
+                        <th>Platform</th>
+                        <th>Mevcut Fiyat</th>
+                        <th>Yapay Zeka Analizi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Ak�ll� Telefon X</td>
+                        <td>E-Ticaret A</td>
+                        <td>24.999 TL</td>
+                        <td><span class="status-badge">Fiyat Kararl�</span></td>
+                    </tr>
+                    <tr>
+                        <td>Kablosuz Kulakl�k Y</td>
+                        <td>E-Ticaret B</td>
+                        <td>3.499 TL</td>
+                        <td><span class="status-badge" style="color: #f43f5e; background: rgba(244, 63, 94, 0.1);">D���� E�ilimi %12</span></td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
-
-        <div class="table-container shadow-sm mb-4">
-            <h3 class="fs-5 fw-bold mb-3 text-secondary">📋 Güncel Takip Listesi</h3>
-            <div class="table-responsive">
-                <table class="table table-hover align-middle mb-0">
-                    <thead class="table-light">
-                        <tr>
-                            <th>ID</th>
-                            <th>Ürün Adı</th>
-                            <th>Güncel Fiyat</th>
-                            <th>Hedef Fiyat</th>
-                            <th>AI Trend Durumu</th>
-                            <th class="text-center">Aksiyon</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for prod in products %}
-                        <tr>
-                            <td><span class="text-muted fw-bold">#{{ prod[0] }}</span></td>
-                            <td><strong class="text-dark d-inline-block text-truncate" style="max-width: 300px;">{{ prod[1] }}</strong></td>
-                            <td class="fw-bold text-primary fs-5">${{ prod[4] }}</td>
-                            <td class="text-success fw-bold">${{ prod[3] }}</td>
-                            <td>
-                                {% if 'ALIM FIRSATI' in prod[5] %}
-                                    <span class="badge bg-success px-3 py-2 fs-6 shadow-sm">🛒 {{ prod[5] }}</span>
-                                {% elif 'DÜŞÜŞ' in prod[5] %}
-                                    <span class="badge bg-danger px-3 py-2 fs-6 shadow-sm">📉 {{ prod[5] }}</span>
-                                {% elif 'STABİL' in prod[5] %}
-                                    <span class="badge bg-warning text-dark px-3 py-2 fs-6 shadow-sm">➖ {{ prod[5] }}</span>
-                                {% else %}
-                                    <span class="badge bg-info text-dark px-3 py-2 fs-6 shadow-sm">📈 {{ prod[5] }}</span>
-                                {% endif %}
-                            </td>
-                            <td class="text-center">
-                                <button class="btn btn-sm btn-primary fw-bold px-3 shadow-sm" onclick="showChart({{ prod[0] }}, '{{ prod[1] }}')">📊 Analiz Grafiği</button>
-                            </td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <div class="card shadow-sm d-none mb-5" id="chartCard">
-            <div class="card-header bg-primary text-white fw-bold fs-5 shadow-sm" id="chartTitle">Fiyat Analiz Grafiği</div>
-            <div class="card-body bg-white border-bottom border-start border-end rounded-bottom">
-                <canvas id="predictionChart" style="max-height: 380px;"></canvas>
-            </div>
-        </div>
-
     </div>
-
-    <script>
-        let currentChart = null;
-
-        function showChart(productId, productName) {
-            document.getElementById('chartCard').classList.remove('d-none');
-            document.getElementById('chartTitle').innerText = "📊 " + productName + " - Zaman Serisi Yapay Zeka Eğrisi";
-
-            fetch('/api/chart/' + productId)
-                .then(response => response.json())
-                .then(data => {
-                    const ctx = document.getElementById('predictionChart').getContext('2d');
-                    
-                    if (currentChart) {
-                        currentChart.destroy(); // Eski grafiği temizle bellek şişmesin
-                    }
-
-                    // Şık bir gradyan arka plan oluşturuyoruz
-                    let gradient = ctx.createLinearGradient(0, 0, 0, 400);
-                    gradient.addColorStop(0, 'rgba(13, 110, 253, 0.3)');
-                    gradient.addColorStop(1, 'rgba(13, 110, 253, 0.0)');
-
-                    currentChart = new Chart(ctx, {
-                        type: 'line',
-                        data: {
-                            labels: data.labels,
-                            datasets: [{
-                                label: 'Fiyat Geçmişi ($)',
-                                data: data.prices,
-                                borderColor: '#0d6efd',
-                                backgroundColor: gradient,
-                                borderWidth: 3,
-                                pointBackgroundColor: '#0d6efd',
-                                pointRadius: 5,
-                                tension: 0.25,
-                                fill: true
-                            }]
-                        },
-                        options: {
-                            responsive: true,
-                            plugins: {
-                                legend: { position: 'top' }
-                            },
-                            scales: {
-                                y: { grid: { color: '#f1f1f1' } },
-                                x: { grid: { display: false } }
-                            }
-                        }
-                    });
-                });
-        }
-    </script>
 </body>
 </html>
